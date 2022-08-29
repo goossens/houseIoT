@@ -1,0 +1,4 @@
+- targets:  # url;name
+    - https://apple.com;Apple
+    - https://google.com;Google
+    - https://github.com;GitHub

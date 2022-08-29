@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Settings file with local secrets
+settings/settings.h
