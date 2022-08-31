@@ -28,6 +28,40 @@ float humidity;
 
 
 //
+//	onWifiIP
+//
+
+void onWifiIP(WiFiEvent_t event, WiFiEventInfo_t info) {
+	// show our IP address
+	Serial.println("WIFI is connected!");
+	Serial.print("IP address: ");
+	Serial.println(WiFi.localIP());
+	Serial.print("RRSI: ");
+	Serial.println(WiFi.RSSI());
+
+	// start the HTTP server
+	Serial.println("Starting web server...");
+	server.begin();
+}
+
+
+//
+//	onWifiDisconnect
+//
+
+void onWifiDisconnect(WiFiEvent_t event, WiFiEventInfo_t info) {
+	// stop web server
+	server.close();
+
+	// try to reconnect to wifi
+	Serial.print("WiFi lost connection. Reason: ");
+	Serial.println(info.wifi_sta_disconnected.reason);
+	Serial.println("Reconnecting...");
+	WiFi.begin(ssid, password);
+}
+
+
+//
 //	setup
 //
 
@@ -40,15 +74,13 @@ void setup() {
 	}
 
 	// setup wifi
-	Serial.println("Connecting to WiFi...");
-	WiFi.config(ip, gateway, subnet);
 	WiFi.mode(WIFI_STA);
-	WiFi.begin(ssid, password);
+	WiFi.config(ip, gateway, subnet);
+	WiFi.setHostname(hostname);
 
-	while (WiFi.status() != WL_CONNECTED) {
-		delay(1000);
-		Serial.println("Waiting for WiFi connection...");
-	}
+	WiFi.onEvent(onWifiIP, WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_GOT_IP);
+	WiFi.onEvent(onWifiDisconnect, WiFiEvent_t::ARDUINO_EVENT_WIFI_STA_DISCONNECTED);
+	WiFi.begin(ssid, password);
 
 	// setup HTTP request handlers
 	server.on("/", HTTP_GET, []() {
@@ -73,10 +105,6 @@ void setup() {
 	server.onNotFound([]() {
 		server.send(404, "text/plain", "Not found");
 	});
-
-	// start the HTTP server
-	Serial.println("Starting web server...");
-	server.begin();
 
 	// connect to temerature/humidity sensor
 	Serial.println("Connecting to sensors...");
