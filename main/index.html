@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+		<title>Casa Goossens</title>
+	</head>
+	<body>
+		<nav id="menu" class="navbar navbar-dark bg-primary navbar-expand-lg">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Casa Goossens</a>
+				<div id="tabs" class="nav nav-tabs" id="nav-tab" role="tablist"></div>
+			</div>
+		</nav>
+		<iframe id="display"></iframe>
+		<script src="js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+		<script>
+			function createTabs(config) {
+				var display = document.getElementById("display");
+				var tabs = document.getElementById("tabs");
+				var first = true;
+
+				config.forEach(function(tab) {
+					var button = document.createElement("button");
+					button.classList.add("nav-link");
+					button.setAttribute("data-bs-toggle", "tab");
+					button.setAttribute("role", "tab");
+					button.setAttribute("data-url", tab.url);
+					button.innerHTML = tab.name;
+
+					if (first) {
+						button.classList.add("active");
+						button.setAttribute("aria-selected", "true");
+						display.src = tab.url;
+						first = false;
+
+					} else {
+						button.classList.add("text-light");
+						button.setAttribute("aria-selected", "false");
+					}
+
+					button.addEventListener("shown.bs.tab", function(event) {
+						event.target.classList.remove("text-light");
+						event.relatedTarget.classList.add("text-light");
+						display.src = tab.url;
+					});
+
+					tabs.appendChild(button);
+				});
+			}
+
+			function resizeDisplay() {
+				var menu = document.getElementById("menu");
+				var menuSize = menu.getBoundingClientRect();
+				var menuWidth = menuSize.right - menuSize.left;
+				var menuHeight = menuSize.bottom - menuSize.top;
+
+				var display = document.getElementById("display");
+				display.width = menuWidth;
+				display.height = window.innerHeight - menuHeight;
+			}
+
+			window.addEventListener("DOMContentLoaded", function(event) {
+				resizeDisplay();
+
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "config.json");
+
+				xhr.onload = function() {
+					createTabs(JSON.parse(xhr.responseText));
+				}
+
+				xhr.send();
+			});
+
+			window.addEventListener("resize", function(event) {
+				resizeDisplay();
+			});
+		</script>
+	</body>
+</html>
