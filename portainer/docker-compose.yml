@@ -16,6 +16,3 @@ services:
       - portainer:/data
     ports:
       - 9000:9000
-    labels:
-      - "traefik.http.middlewares.portainer.replacepathregex.regex=^/portainer/(.*)"
-      - "traefik.http.middlewares.portainer.replacepathregex.replacement=/$$1"
