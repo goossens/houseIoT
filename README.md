@@ -22,3 +22,7 @@ could keep heating/cooling cost down.
 see what the effect of my fireplace is.
 * My outdoor weather station that keeps track of outdoor temperature,
 humidity, rainfall, wind speed, wind direction and UV light (TODO).
+
+
+
+docker compose up --force-recreate --build --detach
