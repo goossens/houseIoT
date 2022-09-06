@@ -9,6 +9,35 @@ networks:
   back-tier:
 
 services:
+  assistant:
+    image: "ghcr.io/home-assistant/home-assistant:stable"
+    restart: always
+    privileged: true
+    volumes:
+      - ./assistant:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8123:8123
+    networks:
+      - back-tier
+      - front-tier
+
+  grafana:
+    image: grafana/grafana
+    restart: always
+    volumes:
+      - grafana:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    depends_on:
+      - prometheus
+    ports:
+      - 3030:3000
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - back-tier
+      - front-tier
+
   prometheus:
     image: prom/prometheus:latest
     restart: always
@@ -28,22 +57,6 @@ services:
       - speedtest:speedtest
     networks:
       - back-tier
-
-  grafana:
-    image: grafana/grafana
-    restart: always
-    volumes:
-      - grafana:/var/lib/grafana
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
-    depends_on:
-      - prometheus
-    ports:
-      - 3030:3000
-    env_file:
-      - ./grafana/config.monitoring
-    networks:
-      - back-tier
-      - front-tier
 
   ping:
     tty: true
