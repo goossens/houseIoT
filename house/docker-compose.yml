@@ -1,8 +1,9 @@
 version: "3.1"
 
 volumes:
-  prometheus: {}
+  assistant: {}
   grafana: {}
+  prometheus: {}
 
 networks:
   front-tier:
@@ -14,7 +15,7 @@ services:
     restart: always
     privileged: true
     volumes:
-      - ./assistant:/config
+      - assistant:/config
       - /etc/localtime:/etc/localtime:ro
     ports:
       - 8123:8123
