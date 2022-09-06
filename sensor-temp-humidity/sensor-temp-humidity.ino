@@ -33,11 +33,12 @@ float humidity;
 
 void onWifiIP(WiFiEvent_t event, WiFiEventInfo_t info) {
 	// show our IP address
-	Serial.println("WIFI is connected!");
+	Serial.println("WIFI is connected");
 	Serial.print("IP address: ");
 	Serial.println(WiFi.localIP());
 	Serial.print("RRSI: ");
-	Serial.println(WiFi.RSSI());
+	Serial.print(WiFi.RSSI());
+	Serial.println("dB");
 
 	// start the HTTP server
 	Serial.println("Starting web server...");
@@ -73,6 +74,8 @@ void setup() {
 		sleep(1000);
 	}
 
+	Serial.println();
+
 	// setup wifi
 	WiFi.mode(WIFI_STA);
 	WiFi.config(ip, gateway, subnet);
@@ -84,7 +87,16 @@ void setup() {
 
 	// setup HTTP request handlers
 	server.on("/", HTTP_GET, []() {
-		server.send(200, "text/plain", "Hello world");
+		String info = "";
+		info += "Hostname: " + String(hostname) + "\n";
+		info += "IP address: " + WiFi.localIP().toString() + "\n";
+		info += "Wifi RRSI: " + String(WiFi.RSSI()) + "dB\n";
+		String id = String(sht4.readSerial(), HEX);
+		id.toUpperCase();
+		info += "Sensor ID: 0x" +  id + "\n";
+		info += "Temperature: " + String(temperature) + "\n";
+		info += "Humidity: " + String(humidity) + "\n";
+		server.send(200, "text/plain", info);
 	});
 
 	server.on("/metrics", HTTP_GET, []() {
@@ -140,7 +152,7 @@ void loop() {
 		temperature = temp.temperature * 9.0 / 5.0 + 32.0;
 		humidity = hum.relative_humidity;
 
-		// do another scan in 5 seconds
-		nextScan = now + 5000;
+		// do another scan in 10 seconds
+		nextScan = now + 10000;
 	}
 }
