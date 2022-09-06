@@ -1,10 +1,10 @@
 [
 	{
 		"name": "Internet",
-		"url": "http://iot.local:3030/d/o9mIe_Aik/internet?orgId=1&refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/o9mIe_Aik/internet?orgId=1&from=now-1w&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Attic",
-		"url": "http://iot.local:3030/d/ztbzV_ZVz/attic?orgId=1&refresh=1m&kiosk"
+		"url": "http://iot.local:3030/d/ztbzV_ZVz/attic?orgId=1&from=now-1w&to=now &refresh=1m&kiosk"
 	}
 ]
