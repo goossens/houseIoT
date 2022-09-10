@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -51,7 +50,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "fahrenheit"
         },
         "overrides": []
       },
@@ -144,7 +144,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "fahrenheit"
         },
         "overrides": []
       },
@@ -157,13 +158,16 @@
       "id": 8,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "none",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -175,7 +179,7 @@
           },
           "editorMode": "builder",
           "expr": "temperature{id=\"attic\"}",
-          "legendFormat": "__auto",
+          "legendFormat": "Temperature",
           "range": true,
           "refId": "A"
         }
@@ -207,7 +211,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -300,7 +305,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -313,13 +319,16 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
-          "showLegend": false
+          "showLegend": true
         },
         "tooltip": {
-          "mode": "none",
+          "mode": "single",
           "sort": "none"
         }
       },
@@ -331,7 +340,7 @@
           },
           "editorMode": "builder",
           "expr": "humidity{id=\"attic\"}",
-          "legendFormat": "__auto",
+          "legendFormat": "Humidity",
           "range": true,
           "refId": "A"
         }
@@ -349,13 +358,13 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Attic",
   "uid": "ztbzV_ZVz",
-  "version": 18,
+  "version": 19,
   "weekStart": ""
 }
