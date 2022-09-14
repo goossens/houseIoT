@@ -35,7 +35,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -99,7 +100,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -196,7 +198,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "yellow",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -260,7 +263,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "yellow",
+            "mode": "fixed"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -365,6 +369,6 @@
   "timezone": "",
   "title": "Attic",
   "uid": "ztbzV_ZVz",
-  "version": 19,
+  "version": 20,
   "weekStart": ""
 }

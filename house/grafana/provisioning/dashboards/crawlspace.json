@@ -48,7 +48,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -112,7 +113,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "fixedColor": "yellow",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -297,7 +299,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "green",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -361,7 +364,8 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "yellow",
+            "mode": "fixed"
           },
           "mappings": [],
           "thresholds": {
@@ -540,6 +544,6 @@
   "timezone": "",
   "title": "Crawlspace",
   "uid": "12dLToG4k",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
