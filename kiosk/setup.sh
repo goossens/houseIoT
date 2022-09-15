@@ -29,10 +29,6 @@ apt-get install -y chromium-browser
 # create startup script
 cat >/etc/xdg/openbox/autostart << "END"
 #!/bin/sh
-xset -dpms     # disable DPMS (Energy Star) features.
-xset s off     # disable screen saver
-xset s noblank # don't blank the video device
-
 setxkbmap -option terminate:ctrl_alt_bksp
 
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
