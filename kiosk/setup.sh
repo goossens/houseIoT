@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+#	houseIoT
+#	Copyright (c) 2022 Johan A. Goossens. All rights reserved.
+#
+#	This work is licensed under the terms of the MIT license.
+#	For a copy, see <https://opensource.org/licenses/MIT>.
+
 
 # ensure we are running as root
 if [ "${EUID}" -ne 0 ]
@@ -29,6 +36,11 @@ apt-get install -y chromium-browser
 # create startup script
 cat >/etc/xdg/openbox/autostart << "END"
 #!/bin/sh
+
+xset s noblank
+xset s off
+xset -dpms
+
 setxkbmap -option terminate:ctrl_alt_bksp
 
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
@@ -51,6 +63,7 @@ chromium-browser \
 	--overscroll-history-navigation=disabled \
 	--disable-features=TouchpadOverscrollHistoryNavigation \
 	--enable-features=OverlayScrollbar \
+	--force-device-scale-factor=1.4 \
 	http://iot.local
 END
 
