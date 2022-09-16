@@ -22,8 +22,11 @@ apt-get upgrade -y
 apt-get install -y vim dialog
 
 # install mDNS
-#
 apt-get install -y avahi-daemon
+
+# install node
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+apt-get install -y nodejs
 
 # install packages to allow apt to use a repository over HTTPS
 apt-get install -y ca-certificates curl gnupg lsb-release
@@ -56,3 +59,18 @@ WantedBy=sysinit.target
 END
 
 systemctl enable --now reboot
+
+# setup tempest weatherflow listener
+cat >/etc/systemd/system/tempest.service <<END
+[Unit]
+Description=Listen for Tempest Weatherflow UDP messages and provide HTTP access
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/node $(pwd)/index.js
+
+[Install]
+WantedBy=sysinit.target
+END
+
+systemctl enable --now tempest
