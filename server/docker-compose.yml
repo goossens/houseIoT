@@ -1,6 +1,7 @@
 version: "3.1"
 
 volumes:
+  portainer: {}
   assistant: {}
   grafana: {}
   prometheus: {}
@@ -10,6 +11,19 @@ networks:
   back-tier:
 
 services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer:/data
+    ports:
+      - 9000:9000
+
   assistant:
     image: "ghcr.io/home-assistant/home-assistant:stable"
     restart: always
@@ -22,6 +36,13 @@ services:
     networks:
       - back-tier
       - front-tier
+
+  http:
+    build: main
+    container_name: http
+    restart: unless-stopped
+    ports:
+      - 80:80
 
   grafana:
     image: grafana/grafana

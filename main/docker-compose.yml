@@ -1,9 +1,0 @@
-version: '3'
-
-services:
-  http:
-    build: .
-    container_name: http
-    restart: unless-stopped
-    ports:
-      - 80:80
