@@ -47,6 +47,5 @@ scrape_configs:
       - targets: ['10.0.1.202', '10.0.1.203']
 
   - job_name: 'tempest'
-    -port: 9999
     static_configs:
-      - targets: ['172.17.0.1']
+      - targets: ['172.17.0.1:9999']

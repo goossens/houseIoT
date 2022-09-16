@@ -115,7 +115,6 @@ battery{id="tempest"}${battery}`;
 // start listening to weather events
 const weather = dgram.createSocket("udp4");
 weather.bind(50222);
-console.log("Started UDP listener");
 
 weather.on("message", function(msg, rinfo) {
 	msg = JSON.parse(msg.toString());
@@ -139,8 +138,6 @@ weather.on("message", function(msg, rinfo) {
 		lightning_count = msg.obs[0][15];
 
 		battery = msg.obs[0][16];
-
-		console.log(toJSON());
 	}
 });
 
@@ -171,4 +168,3 @@ const server = http.createServer(function (req, res) {
 });
 
 server.listen(9999, "0.0.0.0");
-console.log("Started HTTP server");
