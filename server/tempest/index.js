@@ -20,6 +20,11 @@ var lightning_count;
 
 var battery;
 
+// derived values
+var wind_chill;
+var heat_index;
+var feels_like;
+
 // convert weather observation to text
 function toText() {
 	return `\
@@ -34,7 +39,11 @@ uv: ${uv}
 rain: ${rain}
 lightning_distance: ${lightning_distance}
 lightning_count: ${lightning_count}
-battery: ${battery}`;
+battery: ${battery}
+
+wind_chill: ${wind_chill}
+heat_index: ${heat_index}
+feels_like: ${feels_like}`;
 }
 
 // convert weather observation to JSON
@@ -56,7 +65,11 @@ function toJSON() {
 		"lightning_distance": lightning_distance,
 		"lightning_count": lightning_count,
 
-		"battery": battery
+		"battery": battery,
+
+		"wind_chill": wind_chill,
+		"heat_index": heat_index,
+		"feels_like": feels_like
 	});
 }
 
@@ -109,7 +122,19 @@ lightning_count{id="tempest"}${lightning_count}
 
 # HELP battery Battery strength in volts
 # TYPE battery gauge
-battery{id="tempest"}${battery}`;
+battery{id="tempest"}${battery}
+
+# HELP wind_chill Wind chill in degrees Fahrenheit
+# TYPE wind_chill gauge
+wind_chill{id="tempest"}${wind_chill}
+
+# HELP heat_index Heat index in degrees Fahrenheit
+# TYPE heat_index gauge
+heat_index{id="tempest"}${heat_index}
+
+# HELP feels_like Feel-like temperature in degrees Fahrenheit
+# TYPE feels_like gauge
+feels_like{id="tempest"}${feels_like}`;
 }
 
 // start listening to weather events
@@ -138,6 +163,32 @@ weather.on("message", function(msg, rinfo) {
 		lightning_count = msg.obs[0][15];
 
 		battery = msg.obs[0][16];
+
+		// calculate derived values
+		if (temperature > 50 || wind_avg < 4.8) {
+			wind_chill = temperature;
+
+		} else {
+			wind_chill = (35.74 + (0.6215 * temperature) + ((0.4275 * temperature - 35.75) * Math.pow(wind_avg, 0.16))).toFixed(2);
+		}
+
+		if (temperature < 80 || humidity < 40) {
+			heat_index = temperature;
+
+		} else {
+			heat_index = (
+				-42.379 +
+				2.04901523 * temperature +
+				10.1433127 * humidity +
+				-0.22475541 * temperature * humidity +
+				-6.83783e-3 * Math.pow(temperature, 2) +
+				-5.481717e-2 * Math.pow(humidity, 2) +
+				1.22874e-3 * Math.pow(temperature, 2) * humidity +
+				8.5282e-4 * temperature * Math.pow(humidity, 2) +
+				-1.99e-6 * Math.pow(temperature, 2) * Math.pow(humidity, 2)).toFixed(2);
+		}
+
+		feels_like = (temperature < 65) ? wind_chill : heat_index;
 	}
 });
 
