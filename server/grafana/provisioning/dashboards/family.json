@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -163,7 +162,10 @@
       "id": 12,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -180,7 +182,10 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
+          "exemplar": false,
           "expr": "temperature{id=\"family\"}",
+          "instant": false,
+          "interval": "",
           "legendFormat": "Temperature",
           "range": true,
           "refId": "A"
@@ -322,7 +327,10 @@
       "id": 14,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -481,7 +489,10 @@
       "id": 16,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -640,7 +651,10 @@
       "id": 18,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "min",
+            "max"
+          ],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
@@ -694,13 +708,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Family",
   "uid": "XpG8Fe4Vz",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
