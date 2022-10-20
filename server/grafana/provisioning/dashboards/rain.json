@@ -87,7 +87,8 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
-          "expr": "rain{id=\"tempest\"}",
+          "expr": "sum_over_time(rain{id=\"tempest\"}[$__interval])",
+          "interval": "",
           "legendFormat": "Total Accumulation",
           "range": true,
           "refId": "A"
@@ -276,9 +277,7 @@
         "minVizWidth": 0,
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": [],
           "fields": "",
           "values": false
         },
@@ -292,7 +291,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
-          "expr": "sum(rain{id=\"tempest\"})",
+          "expr": "sum_over_time(rain{id=\"tempest\"}[24h])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -316,6 +315,6 @@
   "timezone": "",
   "title": "Rain",
   "uid": "FMvnpH7Vk",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

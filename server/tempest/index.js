@@ -13,10 +13,10 @@ var humidity;
 var illuminance;
 var uv;
 
-var rain;
+var rain = 0;
 
 var lightning_distance;
-var lightning_count;
+var lightning_count = 0;
 
 var battery;
 
@@ -108,9 +108,13 @@ illuminance{id="tempest"}${illuminance}
 # TYPE uv gauge
 uv{id="tempest"}${uv}
 
-# HELP rain UV Rainfail during last minute in inches
+# HELP rain Rainfall during last minute in inches
 # TYPE rain gauge
 rain{id="tempest"}${rain}
+
+# HELP rain_total Total amount of rain
+# TYPE rain_total counter
+rain_total{id="tempest"}${rain}
 
 # HELP lightning_distance Lighting distance in miles
 # TYPE lightning_distance gauge
@@ -119,6 +123,10 @@ lightning_distance{id="tempest"}${lightning_distance}
 # HELP lightning_count Lighting strike count during last minute
 # TYPE lightning_count gauge
 lightning_count{id="tempest"}${lightning_count}
+
+# HELP lightning_count_total total lighting strikes
+# TYPE lightning_count_total counter
+lightning_count_total{id="tempest"}${lightning_count}
 
 # HELP battery Battery strength in volts
 # TYPE battery gauge
@@ -157,10 +165,10 @@ weather.on("message", function(msg, rinfo) {
 		illuminance = msg.obs[0][9];
 		uv = msg.obs[0][10];
 
-		rain = (msg.obs[0][12] / 25.4).toFixed(4);
+		rain += (msg.obs[0][12] / 25.4).toFixed(4);
 
 		lightning_distance = (msg.obs[0][14] *  0.6214).toFixed(2);
-		lightning_count = msg.obs[0][15];
+		lightning_count += msg.obs[0][15];
 
 		battery = msg.obs[0][16];
 
@@ -209,6 +217,8 @@ const server = http.createServer(function (req, res) {
 		case "/metrics":
 			res.writeHead(200);
 			res.end(toPrometheus());
+			rain = 0;
+			lightning_count = 0;
 			break;
 
 		default:
