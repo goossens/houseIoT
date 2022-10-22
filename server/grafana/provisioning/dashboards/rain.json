@@ -216,7 +216,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
-          "expr": "rain{id=\"tempest\"}",
+          "expr": "sum_over_time(rain{id=\"tempest\"}[$__interval])",
           "legendFormat": "Rain",
           "range": true,
           "refId": "A"
@@ -227,7 +227,7 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
-          "expr": "sum(rain{id=\"tempest\"})",
+          "expr": "sum(rain_total{id=\"tempest\"})",
           "hide": false,
           "legendFormat": "Accumulation",
           "range": true,
@@ -315,6 +315,6 @@
   "timezone": "",
   "title": "Rain",
   "uid": "FMvnpH7Vk",
-  "version": 5,
+  "version": 6,
   "weekStart": ""
 }
