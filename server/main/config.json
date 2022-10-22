@@ -8,7 +8,7 @@
 		"url": "http://iot.local:3030/d/FMvnpH7Vk/rain?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
 	},
 	{
-		"name": "Rain",
+		"name": "Wind",
 		"url": "http://iot.local:3030/d/nPZ_3mH4k/wind?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
 	},
 	{
