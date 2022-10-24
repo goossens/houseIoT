@@ -5,12 +5,15 @@
 //	For a copy, see <https://opensource.org/licenses/MIT>.
 
 
-#include <AirGradient.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
 #include <U8g2lib.h>
 
 #include "settings.h"
+
+#include "sht.h"
+#include "pms.h"
+#include "s8.h"
 
 
 //
@@ -24,11 +27,14 @@ U8G2_SH1106_128X64_NONAME_F_HW_I2C display(U8G2_R2, U8X8_PIN_NONE);
 
 unsigned long nextScan = 0;
 
-AirGradient ag = AirGradient();
-int pm02;
-int co2;
+ShtSensor shtSensor = ShtSensor();
+PmsSensor pmsSensor = PmsSensor();
+S8Sensor s8Sensor = S8Sensor();
+
 float temperature;
 float humidity;
+int pm02;
+int co2;
 
 
 //
@@ -52,14 +58,24 @@ void showText(String line1, String line2, String line3) {
 //
 
 void setup() {
+	// initialize console
+	Serial.begin(9600);
+	Serial.println();
+	Serial.println();
+
 	// initialize display
 	display.begin();
-	showText("Warming up the", "sensors...", "");
 
-	// enable sensors
-	ag.PMS_Init();
-	ag.CO2_Init();
-	ag.TMP_RH_Init(0x44);
+	// initialize sensors
+	shtSensor.init();
+	pmsSensor.init();
+	s8Sensor.init();
+
+	Serial.print("S8 Sensor ID: ");
+	Serial.println(String(s8Sensor.getID(), HEX));
+	Serial.print("S8 Sensor firmware version: ");
+	Serial.println(s8Sensor.getFirmwareVersion());
+	Serial.flush();
 
 	// setup wifi
 	WiFi.mode(WIFI_STA);
@@ -149,20 +165,18 @@ void loop() {
 
 	if (now > nextScan) {
 		// get values
-		pm02 = ag.getPM2_Raw();
-		co2 = ag.getCO2_Raw();
-
-		TMP_RH stat = ag.periodicFetchData();
-		temperature = stat.t * 9.0 / 5.0 + 32.0;
-		humidity = stat.rh;
+		temperature = shtSensor.getTemperature() * 9.0 / 5.0 + 32.0;
+		humidity = shtSensor.getHumidity();
+		pm02 = pmsSensor.getPM2();
+		co2 = s8Sensor.getCO2();
 
 		// update display
-		String line1 = "T: " + String(temperature, 0) + "F RH: " + String(humidity, 0) + "%";
+		String line1 = "TMP: " + String(temperature, 0) + "F RH: " + String(humidity, 0) + "%";
 		String line2 = "PM02: " + String(pm02);
 		String line3 = "CO2: " + String(co2);
 		showText(line1, line2, line3);
 
-		// do another scan in 5 seconds
-		nextScan = now + 5000;
+		// do another scan in 30 seconds
+		nextScan = now + 30000;
 	}
 }
