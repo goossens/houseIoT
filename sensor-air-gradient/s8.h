@@ -108,6 +108,7 @@ private:
 		// send command to sensor
 		serial->write(command, 8);
 		serial->flush();
+		delay(100);
 
 		// read results
 		memset(result, 0, MAX_RESULT_SIZE);
