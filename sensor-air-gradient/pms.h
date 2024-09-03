@@ -1,5 +1,5 @@
 //	houseIoT
-//	Copyright (c) 2022 Johan A. Goossens. All rights reserved.
+//	Copyright (c) 2022-2024 Johan A. Goossens. All rights reserved.
 //
 //	This work is licensed under the terms of the MIT license.
 //	For a copy, see <https://opensource.org/licenses/MIT>.

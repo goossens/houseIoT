@@ -80,6 +80,17 @@ services:
     networks:
       - back-tier
 
+  tempest:
+    build: tempest
+    container_name: tempest
+    restart: unless-stopped
+    ports:
+      - 9999:9999
+      - 50222:50222/udp
+    networks:
+      - back-tier
+      - front-tier
+
   ping:
     tty: true
     stdin_open: true

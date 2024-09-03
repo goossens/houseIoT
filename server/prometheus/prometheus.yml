@@ -52,4 +52,4 @@ scrape_configs:
 
   - job_name: 'tempest'
     static_configs:
-      - targets: ['172.17.0.1:9999']
+      - targets: ['tempest:9999']

@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #	houseIoT
-#	Copyright (c) 2022 Johan A. Goossens. All rights reserved.
+#	Copyright (c) 2022-2024 Johan A. Goossens. All rights reserved.
 #
 #	This work is licensed under the terms of the MIT license.
 #	For a copy, see <https://opensource.org/licenses/MIT>.
@@ -18,59 +18,24 @@ fi
 apt-get update
 apt-get upgrade -y
 
-# add tools
-apt-get install -y vim dialog
 
-# install mDNS
-apt-get install -y avahi-daemon
-
-# install node
-curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-apt-get install -y nodejs
-
-# install packages to allow apt to use a repository over HTTPS
-apt-get install -y ca-certificates curl gnupg lsb-release
-mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+# Add Docker's official GPG key:
+apt-get update
+apt-get install ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
 
 # setup docker repository
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+	$(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+	sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt-get update
 
 # install docker engine, containerd, and docker compose
-apt-get update
-apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # add docker permissions
-usermod -aG docker ${SUDO_USER}
-
-# automatically restart server on power loss
-cat >/etc/systemd/system/reboot.service <<END
-[Unit]
-Description=Reboot after power failure
-
-[Service]
-Type=oneshot
-ExecStart=sudo setpci -s 0:1f.0 0xa4.b=0
-
-[Install]
-WantedBy=sysinit.target
-END
-
-systemctl enable --now reboot
-
-# setup tempest weatherflow listener
-cat >/etc/systemd/system/tempest.service <<END
-[Unit]
-Description=Listen for Tempest Weatherflow UDP messages and provide HTTP access
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/node $(pwd)/index.js
-
-[Install]
-WantedBy=sysinit.target
-END
-
-systemctl enable --now tempest
+usermod -aG docker ${USER}
