@@ -24,12 +24,12 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -66,6 +66,8 @@
       },
       "id": 22,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -75,9 +77,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -85,8 +88,11 @@
             "uid": "P1809F7CD0C75ACF3"
           },
           "editorMode": "builder",
+          "exemplar": false,
           "expr": "temperature{id=\"tempest\"}",
-          "legendFormat": "__auto",
+          "format": "table",
+          "instant": false,
+          "legendFormat": "{{label_name}}",
           "range": true,
           "refId": "A"
         }
@@ -96,6 +102,7 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -106,11 +113,13 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "none",
@@ -119,6 +128,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -152,7 +162,20 @@
           },
           "unit": "fahrenheit"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "MM-DD"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 7,
@@ -171,6 +194,9 @@
           "placement": "bottom",
           "showLegend": true
         },
+        "timezone": [
+          "browser"
+        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -185,6 +211,7 @@
           },
           "editorMode": "builder",
           "expr": "temperature{id=\"tempest\"}",
+          "format": "table",
           "legendFormat": "Temperature",
           "range": true,
           "refId": "A"
@@ -195,6 +222,7 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -231,6 +259,8 @@
       },
       "id": 20,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -240,9 +270,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -251,7 +282,8 @@
           },
           "editorMode": "builder",
           "expr": "feels_like{id=\"tempest\"}",
-          "legendFormat": "__auto",
+          "format": "table",
+          "legendFormat": "{{label_name}}",
           "range": true,
           "refId": "A"
         }
@@ -261,6 +293,7 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -297,6 +330,8 @@
       },
       "id": 24,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -306,9 +341,10 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
@@ -317,7 +353,8 @@
           },
           "editorMode": "builder",
           "expr": "humidity{id=\"tempest\"}",
-          "legendFormat": "__auto",
+          "format": "table",
+          "legendFormat": "{{label_name}}",
           "range": true,
           "refId": "A"
         }
@@ -327,6 +364,7 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -337,11 +375,13 @@
             "mode": "fixed"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 30,
             "gradientMode": "none",
@@ -350,6 +390,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "smooth",
             "lineWidth": 1,
             "pointSize": 5,
@@ -416,6 +457,7 @@
           },
           "editorMode": "builder",
           "expr": "humidity{id=\"tempest\"}",
+          "format": "table",
           "legendFormat": "Humidity",
           "range": true,
           "refId": "A"
@@ -426,16 +468,18 @@
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "fixedColor": "blue",
             "mode": "fixed"
           },
-          "decimals": 3,
+          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -450,7 +494,7 @@
               }
             ]
           },
-          "unit": "pressurembar"
+          "unit": "none"
         },
         "overrides": []
       },
@@ -462,6 +506,8 @@
       },
       "id": 10,
       "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -471,27 +517,34 @@
           "values": false
         },
         "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "showThresholdMarkers": true,
+        "sizing": "auto"
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "pressure{id=\"tempest\"}",
-          "legendFormat": "__auto",
+          "expr": "uv{id=\"tempest\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "{{label_name}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Air Pressure",
+      "title": "UV Index",
       "type": "gauge"
     },
     {
       "datasource": {
+        "default": true,
         "type": "prometheus",
         "uid": "P1809F7CD0C75ACF3"
       },
@@ -501,7 +554,7 @@
             "fixedColor": "purple",
             "mode": "fixed"
           },
-          "decimals": 0,
+          "decimals": 3,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -509,20 +562,16 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
-          "unit": "lumens"
+          "unit": "pressurembar"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 12,
+        "h": 3,
+        "w": 24,
         "x": 0,
         "y": 14
       },
@@ -532,6 +581,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -539,96 +589,38 @@
           "fields": "",
           "values": false
         },
-        "textMode": "auto"
+        "showPercentChange": false,
+        "text": {
+          "titleSize": 1
+        },
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.0",
+      "pluginVersion": "11.2.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "P1809F7CD0C75ACF3"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "illuminance{id=\"tempest\"}",
+          "expr": "pressure{id=\"tempest\"}",
+          "format": "table",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Brightness",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P1809F7CD0C75ACF3"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "purple",
-            "mode": "fixed"
-          },
-          "decimals": 0,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 12,
-        "x": 12,
-        "y": 14
-      },
-      "id": 8,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.1.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P1809F7CD0C75ACF3"
-          },
-          "editorMode": "builder",
-          "expr": "uv{id=\"tempest\"}",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "UV Index",
+      "title": "Air Pressure",
       "type": "stat"
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
@@ -638,9 +630,9 @@
     "to": "now"
   },
   "timepicker": {},
-  "timezone": "",
+  "timezone": "browser",
   "title": "Weather",
   "uid": "oeF9BV7Vk",
-  "version": 7,
+  "version": 1,
   "weekStart": ""
 }

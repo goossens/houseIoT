@@ -1,30 +1,30 @@
 [
 	{
 		"name": "Weather",
-		"url": "http://iot.local:3030/d/oeF9BV7Vk/weather?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/oeF9BV7Vk/weather?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Rain",
-		"url": "http://iot.local:3030/d/FMvnpH7Vk/rain?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/FMvnpH7Vk/rain?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Wind",
-		"url": "http://iot.local:3030/d/nPZ_3mH4k/wind?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/nPZ_3mH4k/wind?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Attic",
-		"url": "http://iot.local:3030/d/ztbzV_ZVz/attic?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/ztbzV_ZVz/attic?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Backroom",
-		"url": "http://iot.local:3030/d/XpG8Fe4Vz/family?orgId=1&from=now-1w&to=now &refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/XpG8Fe4Vz/family?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Crawlspace",
-		"url": "http://iot.local:3030/d/12dLToG4k/crawlspace?orgId=1&from=now-1w&to=now&refresh=5m&kiosk"
+		"url": "http://iot.local:3030/d/12dLToG4k/crawlspace?orgId=1&from=now-7d&to=now&refresh=5m&kiosk"
 	},
 	{
 		"name": "Internet",
-		"url": "http://iot.local:3030/d/o9mIe_Aik/internet?orgId=1&from=now-1w&to=now&refresh=15m&kiosk"
+		"url": "http://iot.local:3030/d/o9mIe_Aik/internet?orgId=1&from=now-7d&to=now&refresh=15m&kiosk"
 	}
 ]
