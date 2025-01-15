@@ -1,3 +1,10 @@
+//	houseIoT
+//	Copyright (c) 2022-2025 Johan A. Goossens. All rights reserved.
+//
+//	This work is licensed under the terms of the MIT license.
+//	For a copy, see <https://opensource.org/licenses/MIT>.
+
+
 const dgram = require("dgram");
 const http = require("http");
 
@@ -173,11 +180,11 @@ weather.on("message", function(msg, rinfo) {
 		battery = msg.obs[0][16];
 
 		// calculate derived values
-		if (temperature > 50 || wind_avg < 4.8) {
+		if (temperature > 50 || wind_gust < 1) {
 			wind_chill = temperature;
 
 		} else {
-			wind_chill = (35.74 + (0.6215 * temperature) + ((0.4275 * temperature - 35.75) * Math.pow(wind_avg, 0.16))).toFixed(2);
+			wind_chill = (35.74 + (0.6215 * temperature) + ((0.4275 * temperature - 35.75) * Math.pow(wind_gust * 1.2, 0.16))).toFixed(2);
 		}
 
 		if (temperature < 80 || humidity < 40) {
