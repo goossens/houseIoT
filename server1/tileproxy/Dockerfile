@@ -1,4 +1,4 @@
-FROM node:24-alpine3.38
+FROM node:24-alpine
 COPY . .
 RUN npm ci
 EXPOSE 3200
