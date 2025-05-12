@@ -19,7 +19,7 @@ apt-get update
 apt-get upgrade -y
 
 # ensure boot process waits for network connection
-raspi-config nonint do_boot_wait 0
+raspi-config nonint do_boot_wait 1
 
 # enable auto login
 raspi-config nonint do_boot_behaviour B2

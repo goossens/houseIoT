@@ -1,0 +1,29 @@
+{
+  "name": "tileproxy",
+  "version": "0.4",
+  "description": "A OpenStreetMap caching tile proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goossens/houseIoT.git"
+  },
+  "author": "Johan A. Goossens",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/goossens/houseIoT/issues"
+  },
+  "homepage": "https://github.com/goossens/houseIoT"
+}

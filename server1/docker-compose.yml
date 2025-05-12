@@ -1,0 +1,27 @@
+version: "3.1"
+
+volumes:
+  tileproxy: {}
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - portainer:/data
+    ports:
+      - 9443:9443
+
+  tempest:
+    build: tileproxy
+    container_name: tileproxy
+    restart: unless-stopped
+    volumes:
+      - tileproxy:/cache
+    ports:
+      - 3200:3200
