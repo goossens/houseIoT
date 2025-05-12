@@ -45,5 +45,5 @@ app.get("/*path", async function(req, res) {
 });
 
 app.listen(8010, function() {
-	console.log("Proxy server listening on port 3200");
+	console.log("Proxy server listening on port 8010");
 });

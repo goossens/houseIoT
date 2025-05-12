@@ -31,5 +31,7 @@
 *.out
 *.app
 
-# Settings file with local secrets
+# Local files
+node_modules
 settings/settings.h
+server1/tileproxy/cache
