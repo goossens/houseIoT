@@ -16,11 +16,11 @@ services:
     ports:
       - 9443:9443
 
-  tempest:
+  tileproxy:
     build: tileproxy
     container_name: tileproxy
     restart: unless-stopped
     volumes:
       - tileproxy:/cache
     ports:
-      - 3200:3200
+      - 8010:8010
